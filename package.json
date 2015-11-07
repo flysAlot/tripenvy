@@ -1,0 +1,9 @@
+{
+  "name": "TripEnvy",
+  "description": "Emirates hackathon",
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "^4.13.3"
+  },
+  "scripts": {}
+}
