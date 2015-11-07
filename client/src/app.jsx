@@ -2,12 +2,15 @@ var React = require('react');
 
 //Import components
 var LoginButton = require('./components/LoginButton');
+var HomePage = require('./components/HomePage.jsx');
+
 
 var App = React.createClass({
 
   getInitialState: function getInitialState() {
     return {
       userIsAuthenticated: false,
+      currentPage: 'login'
     }
   },
 
@@ -18,13 +21,18 @@ var App = React.createClass({
     if (token.length > 30) {
       _this.setState({
         userIsAuthenticated: true,
+        currentPage: 'homePage',
         token: token,
       })
     }
   },
 
   LoginButtonBlock: function LoginButtonBlock() {
-    return this.state.userIsAuthenticated ? <div>You are now logged in</div> : <LoginButton />;
+    if(this.state.currentPage === 'login'){
+      return <LoginButton />
+    }else{
+      return <HomePage />
+    }
   },
 
   render: function render() {
