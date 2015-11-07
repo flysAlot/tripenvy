@@ -2,8 +2,9 @@ var React = require('react');
 
 //Import components
 var LoginButton = require('./components/LoginButton');
-var HomePage = require('./components/HomePage.jsx');
 
+var GoogleMap = require('./components/mappy');
+// var serverUrl = 'http://127.0.0.1:3000'
 
 var App = React.createClass({
 
@@ -23,7 +24,21 @@ var App = React.createClass({
         userIsAuthenticated: true,
         currentPage: 'homePage',
         token: token,
-      })
+      }, function() {
+        $.ajax({
+          url: '/getData',
+          type: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify({
+            accessToken: _this.state.token
+          }),
+          // data: {accessToken: this.state.token},
+          success: function success(data) {
+            console.log('yay', data);
+          }
+        });
+      });
+
     }
   },
 
@@ -31,8 +46,9 @@ var App = React.createClass({
     if(this.state.currentPage === 'login'){
       return <LoginButton />
     }else{
-      return <HomePage />
+      return <GoogleMap />
     }
+    return this.state.userIsAuthenticated ? <div>You are now logged in</div> : <LoginButton />;
   },
 
   render: function render() {
