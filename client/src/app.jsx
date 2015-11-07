@@ -2,7 +2,7 @@ var React = require('react');
 
 //Import components
 var LoginButton = require('./components/LoginButton');
-
+var GoogleMap = require('./components/mappy');
 // var serverUrl = 'http://127.0.0.1:3000'
 
 var App = React.createClass({
@@ -10,6 +10,7 @@ var App = React.createClass({
   getInitialState: function getInitialState() {
     return {
       userIsAuthenticated: false,
+      currentPage: 'login'
     }
   },
 
@@ -20,6 +21,7 @@ var App = React.createClass({
     if (token.length > 30) {
       _this.setState({
         userIsAuthenticated: true,
+        currentPage: 'homePage',
         token: token,
       }, function() {
         $.ajax({
@@ -40,6 +42,11 @@ var App = React.createClass({
   },
 
   LoginButtonBlock: function LoginButtonBlock() {
+    if(this.state.currentPage === 'login'){
+      return <LoginButton />
+    }else{
+      return <GoogleMap />
+    }
     return this.state.userIsAuthenticated ? <div>You are now logged in</div> : <LoginButton />;
   },
 
