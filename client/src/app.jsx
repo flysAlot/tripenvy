@@ -3,7 +3,7 @@ var React = require('react');
 //Import components
 var LoginButton = require('./components/LoginButton');
 
-var serverUrl = 'http://127.0.0.1:3000'
+// var serverUrl = 'http://127.0.0.1:3000'
 
 var App = React.createClass({
 
@@ -23,7 +23,7 @@ var App = React.createClass({
         token: token,
       }, function() {
         $.ajax({
-          url: serverUrl + '/getData',
+          url: '/getData',
           type: 'POST',
           contentType: 'application/json',
           data: JSON.stringify({
