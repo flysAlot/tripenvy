@@ -1,6 +1,7 @@
 var express = require('express');
 var cfenv = require('cfenv');
 var bodyParser = require('body-parser');
+var helpers = require('./helpers');
 
 
 var app = express();
@@ -18,8 +19,10 @@ app.get('/', function(req, res) {
 });
 
 app.post('/getData', function(req, res) {
-  console.log(req.body);
-  res.send('sup');
+  helpers.getData(req.body, function(data) {
+    console.log(data.length);
+    res.send(data)
+  });
 })
 
 app.listen(process.env.PORT || 3000);
