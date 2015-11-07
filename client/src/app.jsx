@@ -2,7 +2,6 @@ var React = require('react');
 
 //Import components
 var LoginButton = require('./components/LoginButton');
-
 var GoogleMap = require('./components/mappy');
 // var serverUrl = 'http://127.0.0.1:3000'
 
@@ -48,7 +47,6 @@ var App = React.createClass({
     }else{
       return <GoogleMap />
     }
-    return this.state.userIsAuthenticated ? <div>You are now logged in</div> : <LoginButton />;
   },
 
   render: function render() {
