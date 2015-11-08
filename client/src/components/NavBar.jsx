@@ -22,10 +22,10 @@ var NavBar = React.createClass({
 
     //TODO: please fix the handle triggers!!!
     return this.props.travelPlan.length > 0 ? 
-      <div>
-        <span onClick={this.handleSave} style={{'cursor':'pointer'}}>Save this!</span><br/>
-        <span onClick={this.handleFBShare} style={{'cursor':'pointer'}}>Share with your friends!</span><br/>
-        <span onClick={this.handleVenmo} style={{'cursor':'pointer'}}>Get buy in from your friends!!</span><br/>
+      <div className="social-sharing">
+        <button className="btn btn-default" onClick={this.handleSave} style={{'cursor':'pointer'}}>Save</button>
+        <button className="btn btn-default" onClick={this.handleFBShare} style={{'cursor':'pointer'}}>Share</button>
+        <button className="btn btn-default" onClick={this.handleVenmo} style={{'cursor':'pointer'}}>Get Buy In</button>
       </div> : <div>Start adding something!</div>;
   },
 
@@ -65,9 +65,6 @@ var NavBar = React.createClass({
             <div className="planItemPrice">
               {price}
             </div>
-            <div className="planItemRemove">
-              <i className="fa fa-times"></i>
-            </div>
           </div>
           )
       }
@@ -77,9 +74,7 @@ var NavBar = React.createClass({
     console.log('this is total', total);
 
     //TODO: style this shit
-    var totalText = total === 0 ? "" : "You can experience this for only $" + total + "!";
-
-    
+    var totalText = total === 0 ? "" : <div className="experience-cost">You can experience this for only ${total}!</div>;
 
     return (
       <div className='xs-col-3' style={{'float':'left','width':'20%'}}>

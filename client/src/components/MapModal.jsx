@@ -27,9 +27,10 @@ var MapModal = React.createClass({
     var city = this.props.cities[this.props.selectedCityIndex];
     var imageArray = [];
     if (city) {
-
-
       for (var i = 0; i < city.images.length; i++) {
+        if (i === 3){ //only allow 3 images to be pushed into the images array.
+          break;
+        }
         var imageUrl = city.images[i].images.low_resolution.url;
         // console.log('this is imageUrl', imageUrl);
         imageArray.push(
