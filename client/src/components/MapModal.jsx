@@ -12,8 +12,7 @@ var MapModal = React.createClass({
 
   ActivitiesBlock: function ActivitiesBlock() {
 
-    //TODO: please change the h1 text to something nicer!
-    return this.props.showActivities === false ? <h1 >Click Images to View Activities in the Area</h1> : 
+    return this.props.showActivities === false ? <div style={{'marginTop':'7%','marginLeft':'15%'}}><h1>Click Images to View Activities in the Area</h1></div> : 
       <h1><ActivitiesList 
         cityExperiences={this.props.cities[this.props.selectedCityIndex].experiences.data}
         showMoreInfo={this.props.showMoreInfo}
@@ -44,7 +43,7 @@ var MapModal = React.createClass({
       <div>  
         <Modal show={this.props.showModal} onHide={this.props.close} backdrop={false} bsSize={'large'}>
           <Modal.Header closeButton>
-            <Modal.Title>Check out what your friends have done here!</Modal.Title>
+            <Modal.Title style={{'marginLeft':'30%'}}>Check out what your friends have done here!</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div id="instagram-images">

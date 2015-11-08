@@ -142,3 +142,6 @@ body{
 .list-group-item{
   font-size:25px;
 }
+.modal-header{
+  background-color:#f6eded;
+}

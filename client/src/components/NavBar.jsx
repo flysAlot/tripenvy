@@ -22,10 +22,9 @@ var NavBar = React.createClass({
 
     //TODO: please fix the handle triggers!!!
     return this.props.travelPlan.length > 0 ? 
-      <div className="social-sharing">
-        <button className="btn btn-default" onClick={this.handleSave} style={{'cursor':'pointer'}}>Save</button>
-        <button className="btn btn-default" onClick={this.handleFBShare} style={{'cursor':'pointer'}}>Share</button>
-        <button className="btn btn-default" onClick={this.handleVenmo} style={{'cursor':'pointer'}}>Get Buy In</button>
+      <div className="social-sharing" style={{'marginLeft':'20%'}}>
+        <button className="btn btn-primary" onClick={this.handleFBShare} style={{'cursor':'pointer'}}>Share</button>
+        <button className="btn btn-success" onClick={this.handleVenmo} style={{'cursor':'pointer'}}>Book Now</button>
       </div> : <div>Start adding something!</div>;
   },
 
@@ -74,15 +73,26 @@ var NavBar = React.createClass({
     console.log('this is total', total);
 
     //TODO: style this shit
-    var totalText = total === 0 ? "" : <div className="experience-cost">You can experience this for only ${total}!</div>;
+    var totalText = total === 0 ? "" : 
+    <div className="experience-cost">
+      <h3>Plan this trip for only      <span style={{'fontSize':'30px','fontWeight':'500','color':'green'}}>${total}<span style={{'fontSize':'30px','fontWeight':'500'}}>!</span></span></h3>
+      <h3>Share with Friends or Lock In the Price Below!</h3>
+    </div>;
 
     return (
       <div className='xs-col-3' style={{'float':'left','width':'20%'}}>
         <nav className="navbar">
-          <h3>Your {this.props.selectedCityName} Trip</h3>
+          <div className='logo'>
+            <h1 style={{'fontWeight':'bold'}}>TripEnvy</h1>
+          </div>
+          <div className='navHeader'>
+            <h3>Your {this.props.selectedCityName} Trip</h3>
+          </div>
+          <hr/>
           <div className="planList">
             {planArray}
           </div>
+          <hr/>
           <div>
             {totalText}
           </div>
