@@ -14,6 +14,7 @@ var App = React.createClass({
       showHomePageModal: false,
       showActivities: false,
       isLoading: true,
+      showMoreInfo: false
     }
   },
 
@@ -36,6 +37,13 @@ var App = React.createClass({
   toggleActivities: function toggleActivities() {
     this.setState({
       showActivities: true
+    })
+  },
+
+  toggleMoreInfo: function toggleMoreInfo(bool, index) {
+    this.setState({
+      showMoreInfo: bool,
+      selectedExperienceIndex: index
     })
   },
 
@@ -84,7 +92,10 @@ var App = React.createClass({
         closeModal={this.closeModal}
         toggleActivities={this.toggleActivities}
         showActivities={this.state.showActivities}
-        selectedCityIndex={this.state.selectedCityIndex}/>
+        selectedCityIndex={this.state.selectedCityIndex}
+        showMoreInfo={this.state.showMoreInfo}
+        toggleMoreInfo={this.toggleMoreInfo}
+        selectedExperienceIndex={this.state.selectedExperienceIndex}/>
     }
   },
 

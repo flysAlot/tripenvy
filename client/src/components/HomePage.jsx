@@ -29,7 +29,10 @@ var HomePage = React.createClass({
           toggleActivities={this.props.toggleActivities}
           showActivities={this.props.showActivities}
           cities={cities}
-          selectedCityIndex={this.props.selectedCityIndex}/>
+          selectedCityIndex={this.props.selectedCityIndex}
+          showMoreInfo={this.props.showMoreInfo}
+          toggleMoreInfo={this.props.toggleMoreInfo}
+          selectedExperienceIndex={this.props.selectedExperienceIndex}/>
       </div>
     );
   }

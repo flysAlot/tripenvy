@@ -3,43 +3,68 @@ var Activity = require('./Activity');
 
 var HomePage = React.createClass({
 
-  getInitialState: function() {
-    return {
-      showActivity: false
-    }
+  MoreInfoBlock: function MoreInfoBlock() {
+    return this.props.showMoreInfo ? 
+      <div>
+        <div className="activityDetailTitle">
+        </div>
+        <div className="activityTitle">
+          {this.props.cityExperiences[this.props.selectedExperienceIndex].desc}
+        </div>
+      </div> : <div></div>;
   },
 
-  ActivityBlock: function() {
-    return this.state.showActivity ? <Activity /> : <div></div>;
-  },
 
-  learnMore: function(){
-    this.setState({
-      showActivity: true
-    });
-  },
 
   render: function() {
+    console.log('these are experiences', this.props.cityExperiences);
+    var experienceArray = [];
+    var EXPERIENCES_LIMIT = 5;
+    for (var i = 0; i < Math.min(this.props.cityExperiences.length, EXPERIENCES_LIMIT); i++) {
+      if (this.props.cityExperiences[i].medias) {
+        var imageUrl = this.props.cityExperiences[i].medias[0].src;
+        var name = this.props.cityExperiences[i].name;
+        experienceArray.push(
+          <Activity 
+            imageUrl={imageUrl}
+            name={name}
+            toggleMoreInfo={this.props.toggleMoreInfo}
+            index={i}
+            key={i}/>
+          )
+      }
+
+    }
+    // var resultArray = shuffle(experienceArray).slice(0,5);
     return (
       <div id="activities-area">
-        <div id="activity-list">
-          <div className="activity">
-            <div className="activityImg">
-              <img src="http://dev.xola.com/experiences/4fe0fcba536e86cc4400001a/medias/4fe24dbb536e86364900002c?width=260&height=200" />
-            </div>
-            <div className="activityTitle">
-              Sea Cave Kayaking in Mendocino
-            </div>
-            <div className="activityButton">
-              <button className="btn btn-default" onClick={this.learnMore}>Learn More</button>
-            </div>
-          </div>
+        <div id="activity-list" style={{'width':'50%'}}>
+          {experienceArray}
         </div>
-        {this.ActivityBlock() }
+        {this.MoreInfoBlock() }
       </div>
     );
   }
 
 });
+
+var shuffle = function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex ;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
 
 module.exports = HomePage;

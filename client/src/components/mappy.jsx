@@ -133,7 +133,7 @@ var GoogleMap = React.createClass({
       })
     };
 
-    console.log('this is allPoints', allPoints);
+    // console.log('this is allPoints', allPoints);
 
     for(var i = 0; i < allPoints.length; i++){
       var myLatlng = new google.maps.LatLng(allPoints[i].latitude, allPoints[i].longitude);
@@ -147,7 +147,7 @@ var GoogleMap = React.createClass({
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
         // console.log('i', i);
         return function() {
-          console.log('this is i', i);
+          // console.log('this is i', i);
           _this.openModal(i); //pass in the AirPort id here.
           // infowindow.setContent("<ul><li>Latitude " + allPoints[i].latitude + "</li><li>Longitude " + allPoints[i].longitude + "</li></ul>");
           // infowindow.open(map, marker);

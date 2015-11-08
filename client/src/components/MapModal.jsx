@@ -11,7 +11,12 @@ var MapModal = React.createClass({
   },
 
   ActivitiesBlock: function ActivitiesBlock() {
-    return this.props.showActivities === false ? <h1 >Click Images to View Activities in the Area</h1> : <h1><ActivitiesList /></h1>;
+    return this.props.showActivities === false ? <h1 >Click Images to View Activities in the Area</h1> : 
+      <h1><ActivitiesList 
+        cityExperiences={this.props.cities[this.props.selectedCityIndex].experiences.data}
+        showMoreInfo={this.props.showMoreInfo}
+        toggleMoreInfo={this.props.toggleMoreInfo}
+        selectedExperienceIndex={this.props.selectedExperienceIndex}/></h1>;
   },
 
   render: function render() {
@@ -22,9 +27,9 @@ var MapModal = React.createClass({
 
       for (var i = 0; i < city.images.length; i++) {
         var imageUrl = city.images[i].images.low_resolution.url;
-        console.log('this is imageUrl', imageUrl);
+        // console.log('this is imageUrl', imageUrl);
         imageArray.push(
-          <div onClick={this.toggleActivities} className="img-box">
+          <div onClick={this.toggleActivities} className="img-box" key={i}>
             <img className="instagram-img" src={imageUrl} />
           </div>
           )
