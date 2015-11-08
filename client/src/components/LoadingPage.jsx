@@ -5,10 +5,9 @@ var LoadingPage = React.createClass({
   render: function render() {
     if (this.props.isLoading && !this.props.middleLoad) {
       return (
-        <div style={{'width':'800px', 'margin':'0 auto'}}> 
-          <img src="https://docs.sencha.com/cmd/6.x/images/loading.gif"/>
-          <div>We are searching for places that you would LOVE to visit!</div>
-
+        <div className = "loading"> 
+          <img src="http://media.giphy.com/media/Xwylqg5agyn2U/giphy.gif"/>
+          <span>Searching for places that you would LOVE to visit!</span>
         </div>
         )
     } else {
@@ -17,8 +16,9 @@ var LoadingPage = React.createClass({
         _this.props.completeLoading();
       }, 700)
       return (
-        <div style={{'width':'800px', 'margin':'0 auto'}}>  
-          Wow! We found {this.props.number} destinations that you would love!
+        <div className="loading">  
+          <img src="http://media.giphy.com/media/Xwylqg5agyn2U/giphy.gif"/>
+          <span><b>{this.props.number}</b> destinations found that you will love!</span>
         </div>
       );
     }
