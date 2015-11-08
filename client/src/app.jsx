@@ -2,8 +2,8 @@ var React = require('react');
 
 //Import components
 var LoginButton = require('./components/LoginButton');
-var GoogleMap = require('./components/mappy');
 // var serverUrl = 'http://127.0.0.1:3000'
+var HomePage = require('./components/HomePage');
 
 var App = React.createClass({
 
@@ -45,7 +45,7 @@ var App = React.createClass({
     if(this.state.currentPage === 'login'){
       return <LoginButton />
     }else{
-      return <GoogleMap />
+      return <HomePage />
     }
   },
 
@@ -59,4 +59,4 @@ var App = React.createClass({
 });
 
 var element = React.createElement(App);
-React.render(element, document.querySelector('.container'));
+React.render(element, document.querySelector('.container-fluid'));
