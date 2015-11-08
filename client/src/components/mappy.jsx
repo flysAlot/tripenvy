@@ -3,7 +3,7 @@ var Modal = require('react-bootstrap').Modal;
 
 
 var GoogleMap = React.createClass({
-  
+
   openModal: function(selectedCityIndex) {
     this.props.openModal(selectedCityIndex);
   },
@@ -18,12 +18,11 @@ var GoogleMap = React.createClass({
     this.props.addToTravelPlan(planObject);
   },
 
-  //TODO: please center map well! ask Max
   getDefaultProps: function () {
     return {
-      initialZoom: 4,
-      mapCenterLat: 37.773972,
-      mapCenterLng: -122.431297
+      initialZoom: 3,
+      mapCenterLat: 39.828150,
+      mapCenterLng:  -98.579415
     };
   },
 
@@ -132,8 +131,8 @@ var GoogleMap = React.createClass({
     var map = new google.maps.Map(this.getDOMNode(), mapOptions);
     map.mapTypes.set(customMapTypeId, customMapType);
     map.setMapTypeId(customMapTypeId);
-    
-    //stub markers    
+
+    //stub markers
     // var allPoints = [{latitude: 40.7,longitude:74.3},{latitude:37.8,longitude:122.4}];
 
     var allPoints = [];
@@ -166,7 +165,7 @@ var GoogleMap = React.createClass({
           // infowindow.setContent("<ul><li>Latitude " + allPoints[i].latitude + "</li><li>Longitude " + allPoints[i].longitude + "</li></ul>");
           // infowindow.open(map, marker);
         };
-      })(marker, i)); 
+      })(marker, i));
     }
     // this.setState({map: map});
   },
@@ -175,11 +174,11 @@ var GoogleMap = React.createClass({
     var props = this.props;
     return new google.maps.LatLng(props.mapCenterLat, props.mapCenterLng);
   },
-  
+
   render: function () {
     return (
       <div className='map-gic'></div>
-    ); 
+    );
   }
 });
 
