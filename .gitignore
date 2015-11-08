@@ -26,7 +26,6 @@ project.xcworkspace
 #
 node_modules/
 npm-debug.log
-<<<<<<< HEAD
 /client/main.js
 
 #AUTHENTICATION FILES
