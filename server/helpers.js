@@ -204,36 +204,6 @@ var calcDistance = function calcDistance(lat1, lon1, lat2, lon2){
 // [NOTUSED] get results using the Emirates API
 // var getResult = function getResult(originAirport, destinationAirport, date, flightClass) {
 
-<<<<<<< HEAD
-// get results using the Emirates API
-var getResult = function getResult(originAirport, destinationAirport, date, flightClass, cb) {
-  if (!cb) {cb = function(param){console.log(param)}}
-
-  var result;
-
-  var url = 'https://ec2-54-77-6-21.eu-west-1.compute.amazonaws.com:8143/flightavailability/1.0/?FlightDate=' + date + '&Origin=' + originAirport + '&Destination=' + destinationAirport + '&Class=' + flightClass;
-
-  var options = {
-    url: url,
-    rejectUnauthorized: false,
-    headers: {
-      Method: "GET",
-      Accept: "application/json",
-      Authorization: "Bearer 912dc4f9974c2ad4235fb874837f2e"
-    }
-  };
-
-  var callback = function callback(error, response, body) {
-    if (error) {
-      console.log('There was an error: ', error);
-    }
-    // console.log('Emirates API body', body);
-    cb(body);
-  };
-
-  request(options, callback);
-};
-=======
 //   var url = 'https://ec2-54-77-6-21.eu-west-1.compute.amazonaws.com:8143/flightavailability/1.0/?FlightDate=' + date + '&Origin=' + originAirport + '&Destination=' + destinationAirport + '&Class=' + flightClass;
 
 //   var options = {
@@ -256,19 +226,11 @@ var getResult = function getResult(originAirport, destinationAirport, date, flig
 
 //   request(options, callback);
 // };
->>>>>>> [feat] (server): add google flight data
 
 // TO TEST
 // console.log(getResult("SFO", "DXB", "2015-12-12", "economy"));
 
-module.exports = {
-<<<<<<< HEAD
-  getData,
-  getResult
-=======
-  getData
->>>>>>> [feat] (server): add google flight data
-}
+
 
 var getXolaExperiences = function getXolaExperiences(cb, geo, maxPrice, sort) {
   if (!cb) {cb = function(param){console.log(param)}}
@@ -304,3 +266,7 @@ var getXolaExperiences = function getXolaExperiences(cb, geo, maxPrice, sort) {
 // TO TEST
 // getXolaExperiences("40.748817,-73.985428");
 // getXolaExperiences();
+
+module.exports = {
+  getData
+}
