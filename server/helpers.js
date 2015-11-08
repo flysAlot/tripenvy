@@ -16,25 +16,26 @@ var DEFAULT_DATE = "2016-1-27";
 // })
 
 
-var allComplete = function allComplete(gate) {
-  for (var key in gate) {
-    if (gate[key] === false) {
-      return false;
-    }
-  }
-  return true;
-}
-
-var apiGating = {
-  likedContent: false,
-  friendContent: false
-}
-
 var getData = function getData(body, cb) {
+
+  var allComplete = function allComplete(gate) {
+    for (var key in gate) {
+      if (gate[key] === false) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  var apiGating = {
+    likedContent: false,
+    friendContent: false
+  }
+
   var accessToken = body.accessToken;
   var allImages = [];
 
-  getLikedContent(accessToken, function(likedImagesArray) {
+  getLikedContent(accessToken, apiGating, function(likedImagesArray) {
     for (var i = 0; i < likedImagesArray.length; i++) {
       allImages.push(likedImagesArray[i]);
     }
@@ -74,7 +75,7 @@ var getData = function getData(body, cb) {
       // cb(allImages)
     }
   });
-  getFriendImages(accessToken, function(friendImagesArray) {
+  getFriendImages(accessToken, apiGating, function(friendImagesArray) {
     for (var i = 0; i < friendImagesArray.length; i++) {
       if (!friendImagesArray[i].user_has_liked) {
         allImages.push(friendImagesArray[i]);
@@ -123,7 +124,7 @@ var getData = function getData(body, cb) {
   })
 };
 
-var getLikedContent = function getLikes(accessToken, cb) {
+var getLikedContent = function getLikes(accessToken, apiGating, cb) {
   var getLikedQueryString = 'https://api.instagram.com/v1/users/self/media/liked?access_token=' + accessToken;
   var likedImagesArray = [];
 
@@ -160,7 +161,7 @@ var getLikedContent = function getLikes(accessToken, cb) {
   recursiveQuery(getLikedQueryString);
 };
 
-var getFriendImages = function getFriendImages(accessToken, cb) {
+var getFriendImages = function getFriendImages(accessToken, apiGating, cb) {
   var getFriendsQueryString = 'https://api.instagram.com/v1/users/self/feed?access_token=' + accessToken;
 
   var friendImagesArray = [];
