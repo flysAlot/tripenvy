@@ -70,7 +70,6 @@ var getResults = function getResults(origin, destination, date) {
   //   // muteHttpExceptions : true
   // }, function(error, response, body) {
   //   console.log('37body', body);
-  //   console.log ('bigdicks', response.headers);
   //   // console.log('38response', response);
   //   if (error) {
   //     console.log("There was an error with getResults:", error);
@@ -85,3 +84,8 @@ var getResults = function getResults(origin, destination, date) {
 };
 
 // console.log('results thing', getResults("SFO", "DXB"));
+
+
+module.exports = {
+  getResults
+}
