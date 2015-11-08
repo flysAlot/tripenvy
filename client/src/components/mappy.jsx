@@ -167,6 +167,14 @@ var GoogleMap = React.createClass({
         };
       })(marker, i));
     }
+    var me = '../me.png';
+    var homeLatlng = new google.maps.LatLng(22.452778,55.364444);
+    var meMarker = new google.maps.Marker({
+      position:homeLatlng,
+      map:map,
+      animation: google.maps.Animation.DROP,
+      icon: me
+    })
     // this.setState({map: map});
   },
 
