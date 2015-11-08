@@ -1,6 +1,6 @@
 var request = require('request');
 var airportData = require('./airportData');
-var auth = require('../auth.js');
+//var auth = require('../auth.js');
 
 var allComplete = function allComplete(gate) {
   for (var key in gate) {
