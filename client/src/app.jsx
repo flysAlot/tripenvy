@@ -10,8 +10,31 @@ var App = React.createClass({
   getInitialState: function getInitialState() {
     return {
       userIsAuthenticated: false,
-      currentPage: 'login'
+      currentPage: 'login',
+      showHomePageModal: false,
+      showActivities: false
     }
+  },
+
+  //MODAL METHODS
+  openModal: function openModal() {
+    this.setState({
+      showHomePageModal: true
+    })
+  },
+
+  closeModal: function closeModal() {
+    this.setState({
+      showHomePageModal: false
+    })
+  },
+
+  //ACTIVITIES METHODS
+
+  toggleActivities: function toggleActivities() {
+    this.setState({
+      showActivities: true
+    })
   },
 
   //Checks if the user is authenticated (with an authentication url--not robust, but it'll do with implicit flow)
@@ -45,7 +68,12 @@ var App = React.createClass({
     if(this.state.currentPage === 'login'){
       return <LoginButton />
     }else{
-      return <HomePage />
+      return <HomePage 
+        showModal={this.state.showHomePageModal}
+        openModal={this.openModal}
+        closeModal={this.closeModal}
+        toggleActivities={this.toggleActivities}
+        showActivities={this.state.showActivities}/>
     }
   },
 

@@ -3,22 +3,18 @@ var Modal = require('react-bootstrap').Modal;
 var Button = require('react-bootstrap').Button;
 var ActivitiesList = require('./ActivitiesList');
 
+var fakeActivitiesData = {
+
+};
+
 var MapModal = React.createClass({
 
-  getInitialState: function() {
-    return {
-      showActivities: false
-    }
-  },
-
-  showActivities: function() {
-    this.setState({
-      showActivities: true
-    })
+  toggleActivities: function toggleActivities() {
+    this.props.toggleActivities();
   },
 
   ActivitiesBlock: function ActivitiesBlock() {
-    return this.state.showActivities === false ? <h1 >Click Images to View Activities in the Area</h1> : <h1><ActivitiesList /></h1>;
+    return this.props.showActivities === false ? <h1 >Click Images to View Activities in the Area</h1> : <h1><ActivitiesList /></h1>;
   },
 
   render: function render() {
@@ -30,7 +26,7 @@ var MapModal = React.createClass({
           </Modal.Header>
           <Modal.Body>
             <div id="instagram-images">
-              <div onClick={this.showActivities} className="img-box">
+              <div onClick={this.toggleActivities} className="img-box">
                 <img className="instagram-img" src="http://www.staysf.com/upload/attraction/20080519172721_golden%20gate%20park.jpg" />
               </div>
               <div className="img-box">
