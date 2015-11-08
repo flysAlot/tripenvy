@@ -25,7 +25,7 @@ var NavBar = React.createClass({
       <div className="social-sharing" style={{'marginLeft':'20%'}}>
         <button className="btn btn-primary" onClick={this.handleFBShare} style={{'cursor':'pointer'}}>Share</button>
         <button className="btn btn-success" onClick={this.handleVenmo} style={{'cursor':'pointer'}}>Book Now</button>
-      </div> : <div>Start adding something!</div>;
+      </div> : <div className="add-something">Start building your trip! <br />Choose a destination</div>;
   },
 
   render: function() {

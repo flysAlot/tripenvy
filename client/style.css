@@ -57,6 +57,12 @@ body{
   overflow: auto;
 }
 
+.add-something {
+  text-align: center;
+  display: block;
+
+}
+
 .planItem {
   padding-top:10px;
   padding-bottom: 10px;
