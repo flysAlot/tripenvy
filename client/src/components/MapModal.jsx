@@ -3,9 +3,6 @@ var Modal = require('react-bootstrap').Modal;
 var Button = require('react-bootstrap').Button;
 var ActivitiesList = require('./ActivitiesList');
 
-var fakeActivitiesData = {
-
-};
 
 var MapModal = React.createClass({
 
@@ -18,9 +15,7 @@ var MapModal = React.createClass({
   },
 
   render: function render() {
-    // console.log('props', this.props);
     var city = this.props.cities[this.props.selectedCityIndex];
-    // console.log('this is city', city);
     var imageArray = [];
     if (city) {
 

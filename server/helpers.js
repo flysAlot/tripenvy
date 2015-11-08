@@ -43,17 +43,23 @@ var getData = function getData(body, cb) {
       var counter = 0;
       for (var airport in destinationsWithImages) {
         var destination = destinationsWithImages[airport];
-        googleFlightsAPI.getResults(DEFAULT_ORIGIN, destination.airportCode, DEFAULT_DATE, function(response) {
+        googleFlightsAPI.getResults(DEFAULT_ORIGIN, destination.airportCode, DEFAULT_DATE, {lat: destination.lat, lon: destination.lon}, function(response, coordinates, des) {
           var res = JSON.parse(response);
-          destinationsWithImages[airport].flightData = res;
+          // if (res.trips) {
+          //   console.log(res.trips.data.airport);
+          // }
+          console.log('des',des)
+          destinationsWithImages[des].flightData = res;
           // console.log(destinationsWithImages);
 
-          var coordinates = destination.lat + ',' + destination.lon + ',' + '80';
-          console.log(coordinates);
+          var coordinateString = coordinates.lat + ',' + coordinates.lon + ',' + '80';
+          // console.log(coordinateString);
 
-          xolaAPI.getXolaExperiences(coordinates, '', 'price[desc]', auth.xolaAPIKey, function(data, err) {
+          xolaAPI.getXolaExperiences(coordinateString, '', 'price[desc]', auth.xolaAPIKey, des, function(data, airportCode) {
             var experiences = JSON.parse(data);
-            destinationsWithImages[airport].experiences = experiences;
+            // console.log('airportCode', airportCode);
+            // console.log('experiences', experiences);
+            destinationsWithImages[airportCode].experiences = experiences;
             counter++;
             if (counter === Object.keys(destinationsWithImages).length) {
               cb(destinationsWithImages);
@@ -83,8 +89,8 @@ var getData = function getData(body, cb) {
 
       for (var airport in destinationsWithImages) {
         var destination = destinationsWithImages[airport];
-        console.log('destination', destination.airportCode);
-        googleFlightsAPI.getResults(DEFAULT_ORIGIN, destination.airportCode, DEFAULT_DATE, function(response, des) {
+        // console.log('destination', destination.airportCode);
+        googleFlightsAPI.getResults(DEFAULT_ORIGIN, destination.airportCode, DEFAULT_DATE, {lat: destination.lat, lon: destination.lon}, function(response, coordinates, des) {
           var res = JSON.parse(response);
           // if (res.trips) {
           //   console.log(res.trips.data.airport);
@@ -93,12 +99,13 @@ var getData = function getData(body, cb) {
           destinationsWithImages[des].flightData = res;
           // console.log(destinationsWithImages);
 
-          var coordinates = destination.lat + ',' + destination.lon + ',' + '80';
-          // console.log(coordinates);
+          var coordinateString = coordinates.lat + ',' + coordinates.lon + ',' + '80';
+          console.log(coordinateString);
 
-          xolaAPI.getXolaExperiences(coordinates, '', 'price[desc]', auth.xolaAPIKey, des, function(data, airportCode) {
+          xolaAPI.getXolaExperiences(coordinateString, '', 'price[desc]', auth.xolaAPIKey, des, function(data, airportCode) {
             var experiences = JSON.parse(data);
-            console.log('airportCode', airportCode);
+            // console.log('airportCode', airportCode);
+            console.log('experiences', experiences);
             destinationsWithImages[airportCode].experiences = experiences;
             counter++;
             if (counter === Object.keys(destinationsWithImages).length) {
