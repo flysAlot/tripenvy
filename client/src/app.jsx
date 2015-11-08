@@ -4,6 +4,7 @@ var React = require('react');
 var LoginButton = require('./components/LoginButton');
 // var serverUrl = 'http://127.0.0.1:3000'
 var HomePage = require('./components/HomePage');
+var LoadingPage = require('./components/LoadingPage');
 
 var App = React.createClass({
 
@@ -13,9 +14,11 @@ var App = React.createClass({
       currentPage: 'login',
       showHomePageModal: false,
       showActivities: false,
+      middleLoad: false,
       isLoading: true,
       showMoreInfo: false,
-      travelPlan: []
+      travelPlan: [],
+      number: 0
     }
   },
 
@@ -62,6 +65,12 @@ var App = React.createClass({
     })
   },
 
+  completeLoading: function completeLoading() {
+    this.setState({
+      isLoading: false
+    })
+  },
+
   //Checks if the user is authenticated (with an authentication url--not robust, but it'll do with implicit flow)
   componentWillMount: function componentWillMount() {
     var _this = this;
@@ -83,8 +92,9 @@ var App = React.createClass({
           success: function success(data) {
             console.log('yay', data);
             _this.setState({
+              number: Object.keys(data).length,
               allData: data,
-              isLoading: false
+              middleLoad: true
             })
           }
         });
@@ -98,7 +108,12 @@ var App = React.createClass({
       return <LoginButton />
     } else if (this.state.isLoading) {
       //TODO: make a loading screen
-      return <div>loading...</div>
+      return <LoadingPage 
+        isLoading={this.state.isLoading} 
+        middleLoad={this.state.middleLoad}
+        number={this.state.number}
+        allData={this.state.allData}
+        completeLoading={this.completeLoading}/>
     } else {
       return <HomePage
         allData={this.state.allData}
