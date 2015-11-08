@@ -8,9 +8,9 @@ var Button = require('react-bootstrap').Button;
 
 var HomePage = React.createClass({
 
-  triggerModal: function openModal() {
-    this.props.openModal();
-  },
+  // triggerModal: function openModal() {
+  //   this.props.openModal();
+  // },
 
   render: function() {
     var cities = [];
@@ -22,12 +22,14 @@ var HomePage = React.createClass({
     return (
       <div>
         <NavBar />
-        <GoogleMap openModal={this.triggerModal} />
+        <GoogleMap openModal={this.props.openModal} cities={cities}/>
         <MapModal 
           showModal={this.props.showModal} 
           close={this.props.closeModal} 
           toggleActivities={this.props.toggleActivities}
-          showActivities={this.props.showActivities}/>
+          showActivities={this.props.showActivities}
+          cities={cities}
+          selectedCityIndex={this.props.selectedCityIndex}/>
       </div>
     );
   }

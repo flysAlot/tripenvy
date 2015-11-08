@@ -18,6 +18,24 @@ var MapModal = React.createClass({
   },
 
   render: function render() {
+    // console.log('props', this.props);
+    var city = this.props.cities[this.props.selectedCityIndex];
+    // console.log('this is city', city);
+    var imageArray = [];
+    if (city) {
+
+
+      for (var i = 0; i < city.images.length; i++) {
+        var imageUrl = city.images[i].images.low_resolution.url;
+        console.log('this is imageUrl', imageUrl);
+        imageArray.push(
+          <div onClick={this.toggleActivities} className="img-box">
+            <img className="instagram-img" src={imageUrl} />
+          </div>
+          )
+      }
+    }
+
     return (
       <div>  
         <Modal show={this.props.showModal} onHide={this.props.close} backdrop={false} bsSize={'large'}>
@@ -26,15 +44,7 @@ var MapModal = React.createClass({
           </Modal.Header>
           <Modal.Body>
             <div id="instagram-images">
-              <div onClick={this.toggleActivities} className="img-box">
-                <img className="instagram-img" src="http://www.staysf.com/upload/attraction/20080519172721_golden%20gate%20park.jpg" />
-              </div>
-              <div className="img-box">
-                <img className="instagram-img" src="http://www.staysf.com/upload/attraction/20080519172721_golden%20gate%20park.jpg" />
-              </div>
-              <div className="img-box">
-                <img className="instagram-img" src="http://www.staysf.com/upload/attraction/20080519172721_golden%20gate%20park.jpg" />
-              </div>
+              {imageArray}
             </div>
             <hr className="modal-break"/>
             { this.ActivitiesBlock() }

@@ -18,9 +18,10 @@ var App = React.createClass({
   },
 
   //MODAL METHODS
-  openModal: function openModal() {
+  openModal: function openModal(index) {
     this.setState({
-      showHomePageModal: true
+      showHomePageModal: true,
+      selectedCityIndex: index
     })
   },
 
@@ -82,7 +83,8 @@ var App = React.createClass({
         openModal={this.openModal}
         closeModal={this.closeModal}
         toggleActivities={this.toggleActivities}
-        showActivities={this.state.showActivities}/>
+        showActivities={this.state.showActivities}
+        selectedCityIndex={this.state.selectedCityIndex}/>
     }
   },
 
