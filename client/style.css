@@ -8,3 +8,52 @@
   left: 3%;
   height:90%;
 }
+
+.instagram-img {
+  width: 100%;
+  float: left;
+  padding: 1%;
+  cursor: pointer;
+}
+
+.img-box {
+  overflow:auto;
+  float:left;
+  margin-right: 1.5%;
+  width: 31%;
+  box-shadow: 10px 10px 5px gray;
+  margin-bottom: 15px;
+}
+
+#instagram-images {
+  margin: auto;
+  overflow:auto;
+  display: block;
+}
+
+.activities-area {
+  padding: 10px;
+  overflow: auto;
+}
+}
+
+.activity {
+  overflow:auto;
+}
+
+.activityTitle {
+  float: left;
+  font-size: 14px;
+  margin-right: 20px;
+}
+
+.activityImg img {
+  width: 40px;
+  height: 40px;
+  float: left;
+  margin-right: 30px;
+}
+
+.activityButton {
+  float: left;
+}
