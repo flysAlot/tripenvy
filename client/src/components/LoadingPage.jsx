@@ -17,7 +17,8 @@ var LoadingPage = React.createClass({
       }, 700)
       return (
         <div className="loading">  
-          <span>{this.props.number} destinations found that you will love!</span>
+          <img src="http://media.giphy.com/media/Xwylqg5agyn2U/giphy.gif"/>
+          <span><b>{this.props.number}</b> destinations found that you will love!</span>
         </div>
       );
     }
