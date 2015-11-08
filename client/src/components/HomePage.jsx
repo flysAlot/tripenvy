@@ -9,6 +9,11 @@ var Button = require('react-bootstrap').Button;
 var HomePage = React.createClass({
 
   render: function() {
+    var cities = [];
+    for (var key in this.props.allData) {
+      cities.push(this.props)
+    }
+
     return (
       <div>
         <NavBar />

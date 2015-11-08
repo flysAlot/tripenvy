@@ -57,6 +57,9 @@ var App = React.createClass({
           // data: {accessToken: this.state.token},
           success: function success(data) {
             console.log('yay', data);
+            _this.setState({
+              allData: data
+            })
           }
         });
       });
@@ -67,7 +70,8 @@ var App = React.createClass({
     if(this.state.currentPage === 'login'){
       return <LoginButton />
     }else{
-      return <HomePage 
+      return <HomePage
+        allData={this.state.allData}
         showModal={this.state.showHomePageModal}
         openModal={this.openModal}
         closeModal={this.closeModal}

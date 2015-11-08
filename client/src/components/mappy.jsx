@@ -16,7 +16,7 @@ var GoogleMap = React.createClass({
     };
   },
 
-  componentDidMount: function (rootNode) {
+  componentWillReceiveProps: function () {
     var _this = this;
     var customMapType = new google.maps.StyledMapType([
       {
@@ -115,10 +115,10 @@ var GoogleMap = React.createClass({
         mapTypeControlOptions: {
           mapTypeIds: [customMapTypeId]
         }
-      },
-      map = new google.maps.Map(this.getDOMNode(), mapOptions);
-      map.mapTypes.set(customMapTypeId, customMapType);
-      map.setMapTypeId(customMapTypeId);
+      };
+    var map = new google.maps.Map(this.getDOMNode(), mapOptions);
+    map.mapTypes.set(customMapTypeId, customMapType);
+    map.setMapTypeId(customMapTypeId);
     
     //stub markers    
     var allPoints = [{latitude: 40.7,longitude:74.3},{latitude:37.8,longitude:122.4}];
@@ -135,13 +135,13 @@ var GoogleMap = React.createClass({
       })
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
-          _this.openModal();
+          _this.openModal(); //pass in the AirPort id here.
           // infowindow.setContent("<ul><li>Latitude " + allPoints[i].latitude + "</li><li>Longitude " + allPoints[i].longitude + "</li></ul>");
           // infowindow.open(map, marker);
         };
       })(marker, i)); 
     }
-    this.setState({map: map});
+    // this.setState({map: map});
   },
 
   mapCenterLatLng: function () {
