@@ -11,6 +11,8 @@ var MapModal = React.createClass({
   },
 
   ActivitiesBlock: function ActivitiesBlock() {
+
+    //TODO: please change the h1 text to something nicer!
     return this.props.showActivities === false ? <h1 >Click Images to View Activities in the Area</h1> : 
       <h1><ActivitiesList 
         cityExperiences={this.props.cities[this.props.selectedCityIndex].experiences.data}
@@ -37,12 +39,14 @@ var MapModal = React.createClass({
           )
       }
     }
+    var name = this.props.cities[this.props.selectedCityIndex];
 
+    //TODO: see if I can put {name} within the Modal.Title
     return (
       <div>  
         <Modal show={this.props.showModal} onHide={this.props.close} backdrop={false} bsSize={'large'}>
           <Modal.Header closeButton>
-            <Modal.Title>Photos of yo Friendz</Modal.Title>
+            <Modal.Title>Check out what your friends have done here!</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div id="instagram-images">

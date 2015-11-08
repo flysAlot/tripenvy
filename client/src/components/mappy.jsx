@@ -18,6 +18,7 @@ var GoogleMap = React.createClass({
     this.props.addToTravelPlan(planObject);
   },
 
+  //TODO: please center map well! ask Max
   getDefaultProps: function () {
     return {
       initialZoom: 4,

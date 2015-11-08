@@ -2,6 +2,33 @@ var React = require('react');
 
 var NavBar = React.createClass({
 
+  handleSave: function handleClick() {
+    //TODO: please do this!!!!!!!
+    console.log('saved');
+  },
+
+  handleFBShare: function handleFBShare() {
+    //TODO: please do this!!!!!!!
+    console.log('shared on fb')
+  },
+
+  handleVenmo: function handleVenmo() {
+    //TODO: please do this!!!!!!!
+    console.log('split via Venmo')
+  },
+
+  SocialShareBlock: function SocialShareBlock() {
+    //TODO: please do this!!!!!!!
+
+    //TODO: please fix the handle triggers!!!
+    return this.props.travelPlan.length > 0 ? 
+      <div>
+        <span onClick={this.handleSave} style={{'cursor':'pointer'}}>Save this!</span><br/>
+        <span onClick={this.handleFBShare} style={{'cursor':'pointer'}}>Share with your friends!</span><br/>
+        <span onClick={this.handleVenmo} style={{'cursor':'pointer'}}>Get buy in from your friends!!</span><br/>
+      </div> : <div>Start adding something!</div>;
+  },
+
   render: function() {
 
     var planArray = [];
@@ -63,6 +90,9 @@ var NavBar = React.createClass({
           </div>
           <div>
             {totalText}
+          </div>
+          <div>
+            {this.SocialShareBlock()}
           </div>
         </nav>
       </div>
