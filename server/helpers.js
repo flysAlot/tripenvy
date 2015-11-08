@@ -15,6 +15,7 @@ var DEFAULT_DATE = "2016-1-27";
 //   console.log(res);
 // })
 
+
 var allComplete = function allComplete(gate) {
   for (var key in gate) {
     if (gate[key] === false) {
