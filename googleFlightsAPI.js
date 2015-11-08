@@ -10,10 +10,10 @@ var getResults = function getResults(origin, destination, date) {
   var callingBody = {
     "request": {
       "slice": [{
-        "origin": "SFO",
-        "destination": "DXB",
-        // TODO: change date to be some time in the future. currently no ideas.
-        "date": "2015-11-10"
+        "origin": origin,
+        "destination": destination,
+        "date": date, //"2015-11-10"
+        "permittedCarrier": ["EK"]
       }],
       "passengers": {
         "adultCount": 1,
