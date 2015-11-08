@@ -9,12 +9,12 @@ var allComplete = function allComplete(gate) {
     }
   }
   return true;
-}
+};
 
 var apiGating = {
   likedContent: false,
   friendContent: false
-}
+};
 
 var getData = function getData(body, cb) {
   var accessToken = body.accessToken;
@@ -54,7 +54,7 @@ var getLikedContent = function getLikes(accessToken, cb) {
   var recursiveQuery = function recursiveQuery(queryString) {
     requestCounter++;
     console.log('this is requestCounter', requestCounter, 'with queryString', queryString);
-    if (requestCounter >=requestLimit) {
+    if (requestCounter >= requestLimit) {
       console.log('triggered base case');
       apiGating.likedContent = true;
       cb(likedImagesArray);
@@ -93,7 +93,7 @@ var getFriendImages = function getFriendImages(accessToken, cb) {
   var recursiveQuery = function recursiveQuery(queryString) {
     requestCounter++;
     console.log('this is requestCounter', requestCounter, 'with queryString', queryString);
-    if (requestCounter >=requestLimit) {
+    if (requestCounter >= requestLimit) {
       console.log('triggered base case');
       apiGating.friendContent = true;
       cb(friendImagesArray);
@@ -117,7 +117,7 @@ var getFriendImages = function getFriendImages(accessToken, cb) {
     })
   }
   recursiveQuery(getFriendsQueryString);
-}
+};
 
 var findNearestAirport = function findNearestAirport(imageArray, cb) {
   console.log('inside findnearest airport');
@@ -139,23 +139,27 @@ var findNearestAirport = function findNearestAirport(imageArray, cb) {
   console.log('this is the matches', counter);
 }
 
-var calcDistance = function calcDistance(lat1, lon1, lat2, lon2){
+var calcDistance = function calcDistance(lat1, lon1, lat2, lon2) {
   /* implemented from https://en.wikipedia.org/wiki/Great-circle_distance */
-  var c = Math.PI/180;
-  lat1 = lat1*c;
-  lat2 = lat2*c;
-  lon1 = lon1*c;
-  lon2 = lon2*c;
+  var c = Math.PI / 180;
+  lat1 = lat1 * c;
+  lat2 = lat2 * c;
+  lon1 = lon1 * c;
+  lon2 = lon2 * c;
   return 6371000 * 2 * Math.asin(Math.sqrt(
-      Math.sin((lat2-lat1) / 2) * Math.sin((lat2-lat1) / 2) + Math.cos(lat1)*Math.cos(lat2)*
-      Math.sin((lon2-lon1) / 2) * Math.sin((lon2-lon1) / 2)
-    ));
+    Math.sin((lat2 - lat1) / 2) * Math.sin((lat2 - lat1) / 2) + Math.cos(lat1) * Math.cos(lat2) *
+    Math.sin((lon2 - lon1) / 2) * Math.sin((lon2 - lon1) / 2)
+  ));
 }
 
 
 // get results using the Emirates API
 var getResult = function getResult(originAirport, destinationAirport, date, flightClass, cb) {
-  if (!cb) {cb = function(param){console.log(param)}}
+  if (!cb) {
+    cb = function(param) {
+      console.log(param)
+    }
+  }
 
   var result;
 
@@ -185,21 +189,24 @@ var getResult = function getResult(originAirport, destinationAirport, date, flig
 // TO TEST
 // console.log(getResult("SFO", "DXB", "2015-12-12", "economy"));
 
-module.exports = {
-  getData,
-  getResult
-}
 
 var getXolaExperiences = function getXolaExperiences(cb, geo, maxPrice, sort) {
-  if (!cb) {cb = function(param){console.log(param)}}
-  if (!maxPrice) {maxPrice = ""}
-  if (!sort) {sort = "price[asc]"} //or price[desc]
-  if (!geo) {geo = "37.779497, -122.419233"} //SF City Hall
+  if (!cb) {
+    cb = function(param) {
+      console.log(param)
+    }
+  }
+  if (!maxPrice) {
+    maxPrice = ""
+  }
+  if (!sort) {
+    sort = "price[asc]"
+  } //or price[desc]
+  if (!geo) {
+    geo = "37.779497, -122.419233"
+  } //SF City Hall
 
-  var url = 'https://dev.xola.com/api/experiences?geo='
-            + geo
-            + '&price=' + maxPrice
-            + '&sort=' + sort;
+  var url = 'https://dev.xola.com/api/experiences?geo=' + geo + '&price=' + maxPrice + '&sort=' + sort;
 
   var options = {
     url: url,
@@ -224,3 +231,12 @@ var getXolaExperiences = function getXolaExperiences(cb, geo, maxPrice, sort) {
 // TO TEST
 // getXolaExperiences("40.748817,-73.985428");
 // getXolaExperiences();
+
+
+
+
+module.exports = {
+  getData,
+  getResult,
+  getXolaExperiences
+}
