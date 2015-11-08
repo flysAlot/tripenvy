@@ -9,6 +9,7 @@ var NavBar = React.createClass({
 
   handleFBShare: function handleFBShare() {
     //TODO: please do this!!!!!!!
+    window.open("https://twitter.com/intent/tweet?text=Hello%20Everyone%20@%20Emirates%20Hackathon&via=TripEnvy&original_referer=http://tripenvy.mybluemix.net", "_blank");
     console.log('shared on fb')
   },
 
@@ -21,7 +22,7 @@ var NavBar = React.createClass({
     //TODO: please do this!!!!!!!
 
     //TODO: please fix the handle triggers!!!
-    return this.props.travelPlan.length > 0 ? 
+    return this.props.travelPlan.length > 0 ?
       <div className="social-sharing" style={{'marginLeft':'20%'}}>
         <button className="btn btn-primary" onClick={this.handleFBShare} style={{'cursor':'pointer'}}>Share</button>
         <button className="btn btn-success" onClick={this.handleVenmo} style={{'cursor':'pointer'}}>Book Now</button>
@@ -73,7 +74,7 @@ var NavBar = React.createClass({
     console.log('this is total', total);
 
     //TODO: style this shit
-    var totalText = total === 0 ? "" : 
+    var totalText = total === 0 ? "" :
     <div className="experience-cost">
       <h3>Plan this trip for only      <span style={{'fontSize':'30px','fontWeight':'500','color':'green'}}>${total}<span style={{'fontSize':'30px','fontWeight':'500'}}>!</span></span></h3>
       <h3>Share with Friends or Lock In the Price Below!</h3>
