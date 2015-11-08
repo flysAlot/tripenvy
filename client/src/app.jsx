@@ -60,7 +60,6 @@ var App = React.createClass({
           }
         });
       });
-
     }
   },
 

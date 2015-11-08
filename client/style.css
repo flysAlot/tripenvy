@@ -1,14 +1,82 @@
+.container-fluid {
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+}
+
+.modal-dialog{
+    overflow-y: initial !important
+}
+.modal-body{
+    height: 90%;
+    overflow-y: auto;
+}
+
+/* Map Customization */
 .map-gic {
   height: 100%;
   width: 80%;
   float: right;
 }
+
+/* Modal Customization */
 .modal-content{
   width: 125%;
   left: 3%;
   height:90%;
 }
 
+/* Nav Bar Styles */
+.navbar h3 {
+  text-align: center;
+}
+
+.planList {
+  margin-top: 10px;
+  overflow: auto;
+}
+
+.planItem {
+  padding-top:10px;
+  padding-bottom: 10px;
+  overflow: auto;
+}
+
+.planItem:hover {
+  background-color: #d3d3d3;
+  cursor: pointer;
+}
+
+.planIcon {
+  float: left;
+  margin-left: 10px;
+  margin-right: 20px;
+  width: 40px;
+  height: 40px;
+}
+
+.planItemName {
+  float: left;
+  margin-top: 8px;
+  width: 120px;
+}
+
+.planItemPrice {
+  float: left;
+  width: 50px;
+  margin-top: 3px;
+  font-size: 20px;
+  color: green;
+}
+
+.planItemRemove {
+  float:left;
+  margin-left: 5px;
+  margin-top: 3px;
+  cursor: pointer;
+}
+
+
+/* In-Modal Styles */
 .instagram-img {
   width: 100%;
   float: left;
@@ -31,6 +99,7 @@
   display: block;
 }
 
+/* Activity Styles in Modal*/
 .activities-area {
   padding: 10px;
   overflow: auto;
