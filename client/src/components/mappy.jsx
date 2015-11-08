@@ -22,8 +22,8 @@ var GoogleMap = React.createClass({
   getDefaultProps: function () {
     return {
       initialZoom: 4,
-      mapCenterLat: 40.7,
-      mapCenterLng: 74.3
+      mapCenterLat: 37.773972,
+      mapCenterLng: -122.431297
     };
   },
 

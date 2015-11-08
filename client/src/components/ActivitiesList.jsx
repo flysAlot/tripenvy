@@ -1,16 +1,33 @@
 var React = require('react');
 var Activity = require('./Activity');
+var ListGroup = require('react-bootstrap').ListGroup;
 
 var HomePage = React.createClass({
+  AddThis: function (){
+    var planObject = {
+      name: this.props.cityExperiences[this.props.selectedExperienceIndex].name,
+      price: "$" + this.props.cityExperiences[this.props.selectedExperienceIndex].price,
+      category: "experience",
+      randomInt: Math.floor(Math.random()*5),
+    };
+    this.props.addToTravelPlan(planObject);
+  },
 
   MoreInfoBlock: function MoreInfoBlock() {
     return this.props.showMoreInfo ? 
       <div>
-        <div className="activityDetailTitle">
+        <div className="activityImage" style={{'float':'left','width':'30%', 'marginLeft':'2%'}}>
+          <img className='xolaImage' src={this.props.cityExperiences[this.props.selectedExperienceIndex].medias[0].src}/>
+          <div style={{'marginTop':'8%','marginLeft':'2%'}} className="activityPrice">
+          <span style={{'float':'left','fontWeight':'500','marginRight':'3%'}}>${this.props.cityExperiences[this.props.selectedExperienceIndex].price}</span>
+          <div>
+            <button className='btn btn-success' style={{'float':'left'}} onClick={this.AddThis}>Add to Itinerary</button>
+          </div>
+          </div>
         </div>
-        <div className="activityTitle">
-          {this.props.cityExperiences[this.props.selectedExperienceIndex].desc}
-        </div>
+        <div className="activityDesc" style={{'float':'left','width':'65%', 'marginLeft':'2%'}}>
+          <span style={{'fontSize':'14px','fontWeight':'300'}}>{this.props.cityExperiences[this.props.selectedExperienceIndex].desc}</span>
+        </div>          
       </div> : <div></div>;
   },
 
@@ -42,10 +59,14 @@ var HomePage = React.createClass({
     // var resultArray = shuffle(experienceArray).slice(0,5);
     return (
       <div id="activities-area">
-        <div id="activity-list" style={{'width':'50%'}}>
+        <div id="activity-list" style={{'width':'30%', 'float':'left'}}>
+          <ListGroup>
           {experienceArray}
+          </ListGroup>
         </div>
-        {this.MoreInfoBlock() }
+        <div id='activity-info' style={{'width':'70%', 'float':'left'}}>
+          {this.MoreInfoBlock() }
+        </div>
       </div>
     );
   }
@@ -57,6 +78,7 @@ var shuffle = function shuffle(array) {
 
   // While there remain elements to shuffle...
   while (0 !== currentIndex) {
+          // {experienceArray}
 
     // Pick a remaining element...
     randomIndex = Math.floor(Math.random() * currentIndex);
