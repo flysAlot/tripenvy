@@ -19,6 +19,7 @@ app.use(bodyParser.json());
 // });
 
 app.post('/getData', function(req, res) {
+  console.log(helpers);
   helpers.getData(req.body, function(data) {
     console.log(data.length);
     res.send(data)
