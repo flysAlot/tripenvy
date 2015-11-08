@@ -83,7 +83,7 @@ var NavBar = React.createClass({
       <div className='xs-col-3' style={{'float':'left','width':'20%',}}>
         <nav className="navbar">  
           <div className='logo' style={{'paddingLeft':'10%','height':'10%','backgroundColor':'#009ACD','marginTop':'-7%','marginBottom':'-6%'}}>
-            <i className='logoFont' style={{'float':'left','marginRight':'15px'}}className="fa fa-camera-retro fa-5x fa-inverse"></i><h1 className='logoFont' style={{'fontWeight':'bold','paddingTop':'10%','marginLeft':'8%'}}>TripEnvy</h1>
+            <i style={{'float':'left','marginRight':'15px'}} className="fa fa-camera-retro fa-5x fa-inverse"></i><h1 className='logoFont' style={{'fontWeight':'bold','paddingTop':'10%','marginLeft':'8%'}}>TripEnvy</h1>
           </div>
           <hr/>
           <div className='navHeader'>
