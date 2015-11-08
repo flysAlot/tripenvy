@@ -8,25 +8,16 @@ var Button = require('react-bootstrap').Button;
 
 var HomePage = React.createClass({
 
-  getInitialState: function(){
-    return { 
-      showModal: false,
-    };
-  },
-  
-  close: function() {
-    this.setState({ showModal: false });
-  },
-  open: function() {
-    this.setState({ showModal: true });
-  },
-
   render: function() {
     return (
       <div>
         <NavBar />
-        <GoogleMap openModal={this.open} />
-        <MapModal showModal={this.state.showModal} close={this.close} />
+        <GoogleMap openModal={this.props.openModal} />
+        <MapModal 
+          showModal={this.props.showModal} 
+          close={this.props.closeModal} 
+          toggleActivities={this.props.toggleActivities}
+          showActivities={this.props.showActivities}/>
       </div>
     );
   }
