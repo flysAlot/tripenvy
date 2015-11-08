@@ -13,7 +13,7 @@ var getResults = function getResults(origin, destination, date, cb) {
         "origin": origin,
         "destination": destination,
         "date": date, //"2015-11-10"
-        "permittedCarrier": ["EK"]
+        "permittedCarrier": ["EK"],
       }],
       "passengers": {
         "adultCount": 1,
@@ -23,7 +23,8 @@ var getResults = function getResults(origin, destination, date, cb) {
         "seniorCount": 0
       },
       "solutions": 20,
-      "refundable": false
+      "refundable": false,
+      "saleCountry": "US"
     }
   };
 
@@ -59,7 +60,7 @@ var getResults = function getResults(origin, destination, date, cb) {
   }
   request(options, function(err, response, body) {
     // console.log('this is body', body);
-    cb(body);
+    cb(body, destination);
   })
   // request({
   //   method: "POST",

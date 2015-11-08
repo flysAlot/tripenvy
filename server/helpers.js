@@ -2,9 +2,18 @@ var request = require('request');
 var airportData = require('./airportData');
 var auth = require('../auth.js');
 var googleFlightsAPI = require('./../googleFlightsAPI.js');
+var xolaAPI = require('./xolaAPI');
 
-var DEFAULT_ORIGIN = "SFO";
+var DEFAULT_ORIGIN = "DXB";
 var DEFAULT_DATE = "2016-1-27";
+
+
+
+// console.log(auth.xolaAPIKey);
+// xolaAPI.getXolaExperiences("-75.250973, 0, 80", "", "price[desc]", auth.xolaAPIKey, function(res, err) {
+//   var res = JSON.parse(res);
+//   console.log(res);
+// })
 
 var allComplete = function allComplete(gate) {
   for (var key in gate) {
@@ -30,18 +39,27 @@ var getData = function getData(body, cb) {
     }
     if (allComplete(apiGating)) {
       var destinationsWithImages = findNearestAirport(allImages);
+      var counter = 0;
       for (var airport in destinationsWithImages) {
         var destination = destinationsWithImages[airport];
         googleFlightsAPI.getResults(DEFAULT_ORIGIN, destination.airportCode, DEFAULT_DATE, function(response) {
           var res = JSON.parse(response);
           destinationsWithImages[airport].flightData = res;
           // console.log(destinationsWithImages);
-          counter++;
-          if (counter === Object.keys(destinationsWithImages).length) {
-            cb(destinationsWithImages);
-          } else {
-            console.log('nope', counter);
-          }
+
+          var coordinates = destination.lat + ',' + destination.lon + ',' + '80';
+          console.log(coordinates);
+
+          xolaAPI.getXolaExperiences(coordinates, '', 'price[desc]', auth.xolaAPIKey, function(data, err) {
+            var experiences = JSON.parse(data);
+            destinationsWithImages[airport].experiences = experiences;
+            counter++;
+            if (counter === Object.keys(destinationsWithImages).length) {
+              cb(destinationsWithImages);
+            } else {
+              console.log('nope', counter);
+            }
+          })
         });
 
       }
@@ -59,18 +77,35 @@ var getData = function getData(body, cb) {
     if (allComplete(apiGating)) {
       var destinationsWithImages = findNearestAirport(allImages);
       var counter = 0;
+
+
+
       for (var airport in destinationsWithImages) {
         var destination = destinationsWithImages[airport];
-        googleFlightsAPI.getResults(DEFAULT_ORIGIN, destination.airportCode, DEFAULT_DATE, function(response) {
+        console.log('destination', destination.airportCode);
+        googleFlightsAPI.getResults(DEFAULT_ORIGIN, destination.airportCode, DEFAULT_DATE, function(response, des) {
           var res = JSON.parse(response);
-          destinationsWithImages[airport].flightData = res;
+          // if (res.trips) {
+          //   console.log(res.trips.data.airport);
+          // }
+          console.log('des',des)
+          destinationsWithImages[des].flightData = res;
           // console.log(destinationsWithImages);
-          counter++;
-          if (counter === Object.keys(destinationsWithImages).length) {
-            cb(destinationsWithImages);
-          } else {
-            console.log('nope', counter);
-          }
+
+          var coordinates = destination.lat + ',' + destination.lon + ',' + '80';
+          // console.log(coordinates);
+
+          xolaAPI.getXolaExperiences(coordinates, '', 'price[desc]', auth.xolaAPIKey, des, function(data, airportCode) {
+            var experiences = JSON.parse(data);
+            console.log('airportCode', airportCode);
+            destinationsWithImages[airportCode].experiences = experiences;
+            counter++;
+            if (counter === Object.keys(destinationsWithImages).length) {
+              cb(destinationsWithImages);
+            } else {
+              console.log('nope', counter);
+            }
+          })
         });
 
       }
@@ -231,41 +266,6 @@ var calcDistance = function calcDistance(lat1, lon1, lat2, lon2){
 // console.log(getResult("SFO", "DXB", "2015-12-12", "economy"));
 
 
-
-var getXolaExperiences = function getXolaExperiences(cb, geo, maxPrice, sort) {
-  if (!cb) {cb = function(param){console.log(param)}}
-  if (!maxPrice) {maxPrice = ""}
-  if (!sort) {sort = "price[asc]"} //or price[desc]
-  if (!geo) {geo = "37.779497, -122.419233"} //SF City Hall
-
-  var url = 'https://dev.xola.com/api/experiences?geo='
-            + geo
-            + '&price=' + maxPrice
-            + '&sort=' + sort;
-
-  var options = {
-    url: url,
-    headers: {
-      Method: "GET",
-      Accept: "application/json",
-      "X-API-KEY": auth.xolaAPIKey
-    },
-  };
-
-  var callback = function callback(error, response, body) {
-    if (error) {
-      console.log('There was an error: ', error);
-    }
-    // console.log('Xola body', body);
-    cb(body);
-  };
-
-  request(options, callback);
-};
-
-// TO TEST
-// getXolaExperiences("40.748817,-73.985428");
-// getXolaExperiences();
 
 module.exports = {
   getData
