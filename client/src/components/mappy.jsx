@@ -8,6 +8,16 @@ var GoogleMap = React.createClass({
     this.props.openModal(selectedCityIndex);
   },
 
+  clearTravelPlan: function(selectedCityIndex) {
+    this.props.clearTravelPlan();
+    var planObject = {
+      name: "Ticket to " + this.props.cities[selectedCityIndex].airportCode,
+      price: "$" + this.props.cities[selectedCityIndex].flightData.trips.tripOption[0].saleTotal.slice(3),
+      category: "flight"
+    };
+    this.props.addToTravelPlan(planObject);
+  },
+
   getDefaultProps: function () {
     return {
       initialZoom: 4,
@@ -148,6 +158,7 @@ var GoogleMap = React.createClass({
         // console.log('i', i);
         return function() {
           // console.log('this is i', i);
+          _this.clearTravelPlan(i);
           _this.openModal(i); //pass in the AirPort id here.
           // infowindow.setContent("<ul><li>Latitude " + allPoints[i].latitude + "</li><li>Longitude " + allPoints[i].longitude + "</li></ul>");
           // infowindow.open(map, marker);

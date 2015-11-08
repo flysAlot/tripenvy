@@ -18,11 +18,19 @@ var HomePage = React.createClass({
       cities.push(this.props.allData[key]);
     }
     console.log('this is cities', cities);
-
+    var selectedCityName = this.props.selectedCityIndex === 0 || this.props.selectedCityIndex? cities[this.props.selectedCityIndex].city : "";
+    // console.log('this is props index', this.props.selectedCityIndex);
+    console.log('this is props', this.props);
     return (
       <div>
-        <NavBar />
-        <GoogleMap openModal={this.props.openModal} cities={cities}/>
+        <NavBar 
+          selectedCityName={selectedCityName}
+          travelPlan={this.props.travelPlan}/>
+        <GoogleMap 
+          openModal={this.props.openModal} 
+          cities={cities}
+          addToTravelPlan={this.props.addToTravelPlan}
+          clearTravelPlan={this.props.clearTravelPlan}/>
         <MapModal 
           showModal={this.props.showModal} 
           close={this.props.closeModal} 
@@ -32,7 +40,9 @@ var HomePage = React.createClass({
           selectedCityIndex={this.props.selectedCityIndex}
           showMoreInfo={this.props.showMoreInfo}
           toggleMoreInfo={this.props.toggleMoreInfo}
-          selectedExperienceIndex={this.props.selectedExperienceIndex}/>
+          selectedExperienceIndex={this.props.selectedExperienceIndex}
+          addToTravelPlan={this.props.addToTravelPlan}
+          clearTravelPlan={this.props.clearTravelPlan}/>
       </div>
     );
   }

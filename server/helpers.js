@@ -10,7 +10,7 @@ var DEFAULT_DATE = "2016-1-27";
 
 
 // console.log(auth.xolaAPIKey);
-// xolaAPI.getXolaExperiences("-75.250973, 0, 80", "", "price[desc]", auth.xolaAPIKey, function(res, err) {
+// xolaAPI.getXolaExperiences("-75.250973, 0, 80", "", "price[asc]", auth.xolaAPIKey, function(res, err) {
 //   var res = JSON.parse(res);
 //   console.log(res);
 // })
@@ -55,7 +55,7 @@ var getData = function getData(body, cb) {
           var coordinateString = coordinates.lat + ',' + coordinates.lon + ',' + '80';
           // console.log(coordinateString);
 
-          xolaAPI.getXolaExperiences(coordinateString, '', 'price[desc]', auth.xolaAPIKey, des, function(data, airportCode) {
+          xolaAPI.getXolaExperiences(coordinateString, '', 'price[asc]', auth.xolaAPIKey, des, function(data, airportCode) {
             var experiences = JSON.parse(data);
             // console.log('airportCode', airportCode);
             // console.log('experiences', experiences);
@@ -102,7 +102,7 @@ var getData = function getData(body, cb) {
           var coordinateString = coordinates.lat + ',' + coordinates.lon + ',' + '80';
           console.log(coordinateString);
 
-          xolaAPI.getXolaExperiences(coordinateString, '', 'price[desc]', auth.xolaAPIKey, des, function(data, airportCode) {
+          xolaAPI.getXolaExperiences(coordinateString, '', 'price[asc]', auth.xolaAPIKey, des, function(data, airportCode) {
             var experiences = JSON.parse(data);
             // console.log('airportCode', airportCode);
             console.log('experiences', experiences);
@@ -217,6 +217,7 @@ var findNearestAirport = function findNearestAirport(imageArray, cb) {
         result[code] =  result[code] ? result[code] : {
           images: [],
           airportCode: code,
+          city: airportData[j]['city'],
           lat: airportData[j]['lat'],
           lon: airportData[j]['lon'],
           airportName: airportData[j]['airport']

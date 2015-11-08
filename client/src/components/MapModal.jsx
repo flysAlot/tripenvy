@@ -16,7 +16,9 @@ var MapModal = React.createClass({
         cityExperiences={this.props.cities[this.props.selectedCityIndex].experiences.data}
         showMoreInfo={this.props.showMoreInfo}
         toggleMoreInfo={this.props.toggleMoreInfo}
-        selectedExperienceIndex={this.props.selectedExperienceIndex}/></h1>;
+        selectedExperienceIndex={this.props.selectedExperienceIndex}
+        addToTravelPlan={this.props.addToTravelPlan}
+        clearTravelPlan={this.props.clearTravelPlan}/></h1>;
   },
 
   render: function render() {

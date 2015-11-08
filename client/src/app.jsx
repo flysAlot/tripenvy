@@ -14,7 +14,8 @@ var App = React.createClass({
       showHomePageModal: false,
       showActivities: false,
       isLoading: true,
-      showMoreInfo: false
+      showMoreInfo: false,
+      travelPlan: []
     }
   },
 
@@ -44,6 +45,20 @@ var App = React.createClass({
     this.setState({
       showMoreInfo: bool,
       selectedExperienceIndex: index
+    })
+  },
+
+  addToTravelPlan: function addToTravelPlan(item) {
+    var tempPlan = this.state.travelPlan;
+    tempPlan.push(item);
+    this.setState({
+      travelPlan: tempPlan
+    })
+  },
+
+  clearTravelPlan: function clearTravelPlan() {
+    this.setState({
+      travelPlan: []
     })
   },
 
@@ -95,7 +110,10 @@ var App = React.createClass({
         selectedCityIndex={this.state.selectedCityIndex}
         showMoreInfo={this.state.showMoreInfo}
         toggleMoreInfo={this.toggleMoreInfo}
-        selectedExperienceIndex={this.state.selectedExperienceIndex}/>
+        selectedExperienceIndex={this.state.selectedExperienceIndex}
+        travelPlan={this.state.travelPlan}
+        addToTravelPlan={this.addToTravelPlan}
+        clearTravelPlan={this.clearTravelPlan}/>
     }
   },
 

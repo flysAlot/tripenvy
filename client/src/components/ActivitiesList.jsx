@@ -24,12 +24,16 @@ var HomePage = React.createClass({
       if (this.props.cityExperiences[i].medias) {
         var imageUrl = this.props.cityExperiences[i].medias[0].src;
         var name = this.props.cityExperiences[i].name;
+        var price = this.props.cityExperiences[i].price;
         experienceArray.push(
           <Activity 
             imageUrl={imageUrl}
             name={name}
+            price={price}
             toggleMoreInfo={this.props.toggleMoreInfo}
             index={i}
+            addToTravelPlan={this.props.addToTravelPlan}
+            clearTravelPlan={this.props.clearTravelPlan}
             key={i}/>
           )
       }
