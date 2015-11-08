@@ -149,7 +149,7 @@ var GoogleMap = React.createClass({
 
     for(var i = 0; i < allPoints.length; i++){
       var myLatlng = new google.maps.LatLng(allPoints[i].latitude, allPoints[i].longitude);
-      var iconImage = '../airplaneIcon.png';
+      var iconImage = '../flag.png';
       var marker = new google.maps.Marker({
         position: myLatlng,
         map:map,
