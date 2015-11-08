@@ -152,7 +152,6 @@ var calcDistance = function calcDistance(lat1, lon1, lat2, lon2){
     ));
 }
 
-
 // get results using the Emirates API
 var getResult = function getResult(originAirport, destinationAirport, date, flightClass, cb) {
   if (!cb) {cb = function(param){console.log(param)}}
@@ -184,6 +183,7 @@ var getResult = function getResult(originAirport, destinationAirport, date, flig
 
 // TO TEST
 // console.log(getResult("SFO", "DXB", "2015-12-12", "economy"));
+
 
 module.exports = {
   getData,
