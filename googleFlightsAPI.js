@@ -4,8 +4,8 @@ var auth = require('./auth.js');
 var googleFlightsAPIKey = auth.googleFlightsAPIKey;
 
 // get JSON response from Google FLights API
-console.log('api key', googleFlightsAPIKey);
-var getResults = function getResults(origin, destination, date) {
+// console.log('api key', googleFlightsAPIKey);
+var getResults = function getResults(origin, destination, date, cb) {
   var result;
   var callingBody = {
     "request": {
@@ -58,7 +58,8 @@ var getResults = function getResults(origin, destination, date) {
     body: JSON.stringify(callingBody)
   }
   request(options, function(err, response, body) {
-    console.log('this is body', body);
+    // console.log('this is body', body);
+    cb(body);
   })
   // request({
   //   method: "POST",

@@ -1,6 +1,10 @@
 var request = require('request');
 var airportData = require('./airportData');
 var auth = require('../auth.js');
+var googleFlightsAPI = require('./../googleFlightsAPI.js');
+
+var DEFAULT_ORIGIN = "SFO";
+var DEFAULT_DATE = "2016-1-27";
 
 var allComplete = function allComplete(gate) {
   for (var key in gate) {
@@ -18,15 +22,31 @@ var apiGating = {
 
 var getData = function getData(body, cb) {
   var accessToken = body.accessToken;
-  allImages = [];
+  var allImages = [];
 
   getLikedContent(accessToken, function(likedImagesArray) {
     for (var i = 0; i < likedImagesArray.length; i++) {
       allImages.push(likedImagesArray[i]);
     }
     if (allComplete(apiGating)) {
-      findNearestAirport(allImages)
-      cb(allImages)
+      var destinationsWithImages = findNearestAirport(allImages);
+      for (var airport in destinationsWithImages) {
+        var destination = destinationsWithImages[airport];
+        googleFlightsAPI.getResults(DEFAULT_ORIGIN, destination.airportCode, DEFAULT_DATE, function(response) {
+          var res = JSON.parse(response);
+          destinationsWithImages[airport].flightData = res;
+          // console.log(destinationsWithImages);
+          counter++;
+          if (counter === Object.keys(destinationsWithImages).length) {
+            cb(destinationsWithImages);
+          } else {
+            console.log('nope', counter);
+          }
+        });
+
+      }
+      // cb(findNearestAirport(allImages));
+      // cb(allImages)
     }
   });
   getFriendImages(accessToken, function(friendImagesArray) {
@@ -37,8 +57,25 @@ var getData = function getData(body, cb) {
 
     }
     if (allComplete(apiGating)) {
-      findNearestAirport(allImages)
-      cb(allImages)
+      var destinationsWithImages = findNearestAirport(allImages);
+      var counter = 0;
+      for (var airport in destinationsWithImages) {
+        var destination = destinationsWithImages[airport];
+        googleFlightsAPI.getResults(DEFAULT_ORIGIN, destination.airportCode, DEFAULT_DATE, function(response) {
+          var res = JSON.parse(response);
+          destinationsWithImages[airport].flightData = res;
+          // console.log(destinationsWithImages);
+          counter++;
+          if (counter === Object.keys(destinationsWithImages).length) {
+            cb(destinationsWithImages);
+          } else {
+            console.log('nope', counter);
+          }
+        });
+
+      }
+      // cb(findNearestAirport(allImages))
+      // cb(allImages)
     }
   })
 };
@@ -120,6 +157,7 @@ var getFriendImages = function getFriendImages(accessToken, cb) {
 }
 
 var findNearestAirport = function findNearestAirport(imageArray, cb) {
+  var result = {};
   console.log('inside findnearest airport');
   var counter = 0;
   for (var i = 0; i < imageArray.length; i++) {
@@ -131,12 +169,23 @@ var findNearestAirport = function findNearestAirport(imageArray, cb) {
       // console.log(distance);
       if (distance < 32000) {
         counter++
-        console.log('found match for airport', airportData[j]['airport'], i);
+        // console.log('found match for airport', airportData[j]['airport'], i);
+        var code = airportData[j]['code'];
+        result[code] =  result[code] ? result[code] : {
+          images: [],
+          airportCode: code,
+          lat: airportData[j]['lat'],
+          lon: airportData[j]['lon'],
+          airportName: airportData[j]['airport']
+        };
+        result[code].images.push(imageArray[i]);
+        break;
       }
     }
 
   }
-  console.log('this is the matches', counter);
+  console.log(counter);
+  return result;
 }
 
 var calcDistance = function calcDistance(lat1, lon1, lat2, lon2){
@@ -152,7 +201,10 @@ var calcDistance = function calcDistance(lat1, lon1, lat2, lon2){
     ));
 }
 
+// [NOTUSED] get results using the Emirates API
+// var getResult = function getResult(originAirport, destinationAirport, date, flightClass) {
 
+<<<<<<< HEAD
 // get results using the Emirates API
 var getResult = function getResult(originAirport, destinationAirport, date, flightClass, cb) {
   if (!cb) {cb = function(param){console.log(param)}}
@@ -181,13 +233,41 @@ var getResult = function getResult(originAirport, destinationAirport, date, flig
 
   request(options, callback);
 };
+=======
+//   var url = 'https://ec2-54-77-6-21.eu-west-1.compute.amazonaws.com:8143/flightavailability/1.0/?FlightDate=' + date + '&Origin=' + originAirport + '&Destination=' + destinationAirport + '&Class=' + flightClass;
+
+//   var options = {
+//     url: url,
+//     rejectUnauthorized: false,
+//     headers: {
+//       Method: "GET",
+//       Accept: "application/json",
+//       Authorization: "Bearer 912dc4f9974c2ad4235fb874837f2e"
+//     }
+//   };
+
+//   var callback = function callback(error, response, body) {
+//     if (error) {
+//       console.log('There was an error: ', error);
+//     }
+//     // return body;
+//     console.log('body', body);
+//   };
+
+//   request(options, callback);
+// };
+>>>>>>> [feat] (server): add google flight data
 
 // TO TEST
 // console.log(getResult("SFO", "DXB", "2015-12-12", "economy"));
 
 module.exports = {
+<<<<<<< HEAD
   getData,
   getResult
+=======
+  getData
+>>>>>>> [feat] (server): add google flight data
 }
 
 var getXolaExperiences = function getXolaExperiences(cb, geo, maxPrice, sort) {
