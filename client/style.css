@@ -21,6 +21,23 @@ body{
   float: right;
 }
 
+/* Loading page styles */
+.loading {
+  width: 80%;
+  margin: auto;
+  display: block;
+  text-align: center;
+}
+
+.loading img {
+  display: block;
+  margin: auto;
+}
+
+.loading span {
+  font-size: 24px;
+}
+
 /* Modal Customization */
 .modal-content{
   width: 125%;
