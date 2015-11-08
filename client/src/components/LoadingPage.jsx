@@ -6,7 +6,7 @@ var LoadingPage = React.createClass({
     if (this.props.isLoading && !this.props.middleLoad) {
       return (
         <div className = "loading"> 
-          <img src="https://docs.sencha.com/cmd/6.x/images/loading.gif"/>
+          <img src="http://media.giphy.com/media/Xwylqg5agyn2U/giphy.gif"/>
           <span>Searching for places that you would LOVE to visit!</span>
         </div>
         )
