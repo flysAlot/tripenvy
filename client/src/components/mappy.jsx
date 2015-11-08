@@ -61,6 +61,21 @@ var GoogleMap = React.createClass({
             }
         ]
       },
+      // {
+      //   "featureType": "administrative.state",
+      //   "elementType": "geometry.stroke",
+      //   "stylers": [
+      //       {
+      //           "visibility": "on"
+      //       },
+      //       {
+      //           "color": "#F7F5F2"
+      //       },
+      //       {
+      //           "weight": 1
+      //       }
+      //   ]
+      // },
       {
         "featureType": "water",
         "elementType": "all",
