@@ -4,10 +4,21 @@ var Modal = require('react-bootstrap').Modal;
 
 var GoogleMap = React.createClass({
   
-  openModal: function() {
-    this.props.openModal();
+  openModal: function(selectedCityIndex) {
+    this.props.openModal(selectedCityIndex);
   },
 
+  clearTravelPlan: function(selectedCityIndex) {
+    this.props.clearTravelPlan();
+    var planObject = {
+      name: "Ticket to " + this.props.cities[selectedCityIndex].airportCode,
+      price: "$" + this.props.cities[selectedCityIndex].flightData.trips.tripOption[0].saleTotal.slice(3),
+      category: "flight"
+    };
+    this.props.addToTravelPlan(planObject);
+  },
+
+  //TODO: please center map well! ask Max
   getDefaultProps: function () {
     return {
       initialZoom: 4,
@@ -16,7 +27,7 @@ var GoogleMap = React.createClass({
     };
   },
 
-  componentWillReceiveProps: function () {
+  componentDidMount: function () {
     var _this = this;
     var customMapType = new google.maps.StyledMapType([
       {
@@ -121,8 +132,19 @@ var GoogleMap = React.createClass({
     map.setMapTypeId(customMapTypeId);
     
     //stub markers    
-    var allPoints = [{latitude: 40.7,longitude:74.3},{latitude:37.8,longitude:122.4}];
+    // var allPoints = [{latitude: 40.7,longitude:74.3},{latitude:37.8,longitude:122.4}];
 
+    var allPoints = [];
+
+    for (var i = 0; i < this.props.cities.length; i++) {
+      allPoints.push({
+        latitude: this.props.cities[i].lat,
+        longitude: this.props.cities[i].lon,
+        citiesIndex: i
+      })
+    };
+
+    // console.log('this is allPoints', allPoints);
 
     for(var i = 0; i < allPoints.length; i++){
       var myLatlng = new google.maps.LatLng(allPoints[i].latitude, allPoints[i].longitude);
@@ -134,8 +156,11 @@ var GoogleMap = React.createClass({
         icon: iconImage
       })
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        // console.log('i', i);
         return function() {
-          _this.openModal(); //pass in the AirPort id here.
+          // console.log('this is i', i);
+          _this.clearTravelPlan(i);
+          _this.openModal(i); //pass in the AirPort id here.
           // infowindow.setContent("<ul><li>Latitude " + allPoints[i].latitude + "</li><li>Longitude " + allPoints[i].longitude + "</li></ul>");
           // infowindow.open(map, marker);
         };

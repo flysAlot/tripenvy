@@ -12,14 +12,18 @@ var App = React.createClass({
       userIsAuthenticated: false,
       currentPage: 'login',
       showHomePageModal: false,
-      showActivities: false
+      showActivities: false,
+      isLoading: true,
+      showMoreInfo: false,
+      travelPlan: []
     }
   },
 
   //MODAL METHODS
-  openModal: function openModal() {
+  openModal: function openModal(index) {
     this.setState({
-      showHomePageModal: true
+      showHomePageModal: true,
+      selectedCityIndex: index
     })
   },
 
@@ -34,6 +38,27 @@ var App = React.createClass({
   toggleActivities: function toggleActivities() {
     this.setState({
       showActivities: true
+    })
+  },
+
+  toggleMoreInfo: function toggleMoreInfo(bool, index) {
+    this.setState({
+      showMoreInfo: bool,
+      selectedExperienceIndex: index
+    })
+  },
+
+  addToTravelPlan: function addToTravelPlan(item) {
+    var tempPlan = this.state.travelPlan;
+    tempPlan.push(item);
+    this.setState({
+      travelPlan: tempPlan
+    })
+  },
+
+  clearTravelPlan: function clearTravelPlan() {
+    this.setState({
+      travelPlan: []
     })
   },
 
@@ -58,7 +83,8 @@ var App = React.createClass({
           success: function success(data) {
             console.log('yay', data);
             _this.setState({
-              allData: data
+              allData: data,
+              isLoading: false
             })
           }
         });
@@ -67,16 +93,27 @@ var App = React.createClass({
   },
 
   LoginButtonBlock: function LoginButtonBlock() {
-    if(this.state.currentPage === 'login'){
+    if (this.state.currentPage === 'login'){
+      //TODO: make a nice login screen
       return <LoginButton />
-    }else{
+    } else if (this.state.isLoading) {
+      //TODO: make a loading screen
+      return <div>loading...</div>
+    } else {
       return <HomePage
         allData={this.state.allData}
         showModal={this.state.showHomePageModal}
         openModal={this.openModal}
         closeModal={this.closeModal}
         toggleActivities={this.toggleActivities}
-        showActivities={this.state.showActivities}/>
+        showActivities={this.state.showActivities}
+        selectedCityIndex={this.state.selectedCityIndex}
+        showMoreInfo={this.state.showMoreInfo}
+        toggleMoreInfo={this.toggleMoreInfo}
+        selectedExperienceIndex={this.state.selectedExperienceIndex}
+        travelPlan={this.state.travelPlan}
+        addToTravelPlan={this.addToTravelPlan}
+        clearTravelPlan={this.clearTravelPlan}/>
     }
   },
 
