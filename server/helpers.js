@@ -1,5 +1,6 @@
 var request = require('request');
 var airportData = require('./airportData');
+var auth = require('../auth.js');
 
 var allComplete = function allComplete(gate) {
   for (var key in gate) {
@@ -152,14 +153,11 @@ var calcDistance = function calcDistance(lat1, lon1, lat2, lon2){
 }
 
 
-
-module.exports = {
-  getData,
-  getResult
-}
-
 // get results using the Emirates API
-var getResult = function getResult(originAirport, destinationAirport, date, flightClass) {
+var getResult = function getResult(originAirport, destinationAirport, date, flightClass, cb) {
+  if (!cb) {cb = function(param){console.log(param)}}
+
+  var result;
 
   var url = 'https://ec2-54-77-6-21.eu-west-1.compute.amazonaws.com:8143/flightavailability/1.0/?FlightDate=' + date + '&Origin=' + originAirport + '&Destination=' + destinationAirport + '&Class=' + flightClass;
 
@@ -177,8 +175,8 @@ var getResult = function getResult(originAirport, destinationAirport, date, flig
     if (error) {
       console.log('There was an error: ', error);
     }
-    // return body;
-    console.log('body', body);
+    // console.log('Emirates API body', body);
+    cb(body);
   };
 
   request(options, callback);
@@ -188,5 +186,41 @@ var getResult = function getResult(originAirport, destinationAirport, date, flig
 // console.log(getResult("SFO", "DXB", "2015-12-12", "economy"));
 
 module.exports = {
+  getData,
   getResult
 }
+
+var getXolaExperiences = function getXolaExperiences(cb, geo, maxPrice, sort) {
+  if (!cb) {cb = function(param){console.log(param)}}
+  if (!maxPrice) {maxPrice = ""}
+  if (!sort) {sort = "price[asc]"} //or price[desc]
+  if (!geo) {geo = "37.779497, -122.419233"} //SF City Hall
+
+  var url = 'https://dev.xola.com/api/experiences?geo='
+            + geo
+            + '&price=' + maxPrice
+            + '&sort=' + sort;
+
+  var options = {
+    url: url,
+    headers: {
+      Method: "GET",
+      Accept: "application/json",
+      "X-API-KEY": auth.xolaAPIKey
+    },
+  };
+
+  var callback = function callback(error, response, body) {
+    if (error) {
+      console.log('There was an error: ', error);
+    }
+    // console.log('Xola body', body);
+    cb(body);
+  };
+
+  request(options, callback);
+};
+
+// TO TEST
+// getXolaExperiences("40.748817,-73.985428");
+// getXolaExperiences();
