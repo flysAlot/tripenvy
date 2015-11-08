@@ -3,3 +3,8 @@
   width: 80%;
   float: right;
 }
+.modal-content{
+  width: 125%;
+  left: 3%;
+  height:90%;
+}

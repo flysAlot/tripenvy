@@ -1,8 +1,9 @@
 var React = require('react');
 var GoogleMap = require('./mappy');
 var NavBar = require('./NavBar');
-var Modal = require('react-bootstrap').Modal;
 
+var Modal = require('react-bootstrap').Modal;
+var Button = require('react-bootstrap').Button;
 
 var HomePage = React.createClass({
 
@@ -22,7 +23,10 @@ var HomePage = React.createClass({
           <NavBar />
           <GoogleMap openModal={this.open} />
         <div>  
-          <Modal show={this.state.showModal} onHide={this.close}>
+          <Modal show={this.state.showModal} onHide={this.close} backdrop={false} bsSize={'large'}>
+          <Modal.Header closeButton>
+            <Modal.Title>Photos of yo Friendz</Modal.Title>
+          </Modal.Header>
             <Modal.Body>
               <h4>Text in a modal</h4>
               <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
