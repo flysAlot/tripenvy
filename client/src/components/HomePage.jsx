@@ -20,8 +20,8 @@ var HomePage = React.createClass({
   render: function() {
     return (
       <div>
-          <NavBar />
-          <GoogleMap openModal={this.open} />
+        <NavBar />
+        <GoogleMap openModal={this.open} />
         <div>  
           <Modal show={this.state.showModal} onHide={this.close} backdrop={false} bsSize={'large'}>
           <Modal.Header closeButton>

@@ -236,10 +236,12 @@ var calcDistance = function calcDistance(lat1, lon1, lat2, lon2){
     ));
 }
 
+
 // [NOTUSED] get results using the Emirates API
 // var getResult = function getResult(originAirport, destinationAirport, date, flightClass) {
 
 //   var url = 'https://ec2-54-77-6-21.eu-west-1.compute.amazonaws.com:8143/flightavailability/1.0/?FlightDate=' + date + '&Origin=' + originAirport + '&Destination=' + destinationAirport + '&Class=' + flightClass;
+
 
 //   var options = {
 //     url: url,
@@ -264,6 +266,7 @@ var calcDistance = function calcDistance(lat1, lon1, lat2, lon2){
 
 // TO TEST
 // console.log(getResult("SFO", "DXB", "2015-12-12", "economy"));
+
 
 
 
