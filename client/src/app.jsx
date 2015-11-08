@@ -12,7 +12,8 @@ var App = React.createClass({
       userIsAuthenticated: false,
       currentPage: 'login',
       showHomePageModal: false,
-      showActivities: false
+      showActivities: false,
+      isLoading: true,
     }
   },
 
@@ -58,7 +59,8 @@ var App = React.createClass({
           success: function success(data) {
             console.log('yay', data);
             _this.setState({
-              allData: data
+              allData: data,
+              isLoading: false
             })
           }
         });
@@ -67,9 +69,13 @@ var App = React.createClass({
   },
 
   LoginButtonBlock: function LoginButtonBlock() {
-    if(this.state.currentPage === 'login'){
+    if (this.state.currentPage === 'login'){
+      //TODO: make a nice login screen
       return <LoginButton />
-    }else{
+    } else if (this.state.isLoading) {
+      //TODO: make a loading screen
+      return <div>loading...</div>
+    } else {
       return <HomePage
         allData={this.state.allData}
         showModal={this.state.showHomePageModal}

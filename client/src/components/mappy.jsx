@@ -16,7 +16,7 @@ var GoogleMap = React.createClass({
     };
   },
 
-  componentWillReceiveProps: function () {
+  componentDidMount: function () {
     var _this = this;
     var customMapType = new google.maps.StyledMapType([
       {

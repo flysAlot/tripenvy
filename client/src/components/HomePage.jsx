@@ -8,16 +8,21 @@ var Button = require('react-bootstrap').Button;
 
 var HomePage = React.createClass({
 
+  triggerModal: function openModal() {
+    this.props.openModal();
+  },
+
   render: function() {
     var cities = [];
     for (var key in this.props.allData) {
-      cities.push(this.props)
+      cities.push(this.props.allData[key]);
     }
+    console.log('this is cities', cities);
 
     return (
       <div>
         <NavBar />
-        <GoogleMap openModal={this.props.openModal} />
+        <GoogleMap openModal={this.triggerModal} />
         <MapModal 
           showModal={this.props.showModal} 
           close={this.props.closeModal} 
