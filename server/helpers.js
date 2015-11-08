@@ -33,7 +33,7 @@ var getData = function getData(body, cb) {
       if (!friendImagesArray[i].user_has_liked) {
         allImages.push(friendImagesArray[i]);
       }
-      
+
     }
     if (allComplete(apiGating)) {
       findNearestAirport(allImages)
@@ -153,7 +153,40 @@ var calcDistance = function calcDistance(lat1, lon1, lat2, lon2){
 
 
 
+module.exports = {
+  getData,
+  getResult
+}
+
+// get results using the Emirates API
+var getResult = function getResult(originAirport, destinationAirport, date, flightClass) {
+
+  var url = 'https://ec2-54-77-6-21.eu-west-1.compute.amazonaws.com:8143/flightavailability/1.0/?FlightDate=' + date + '&Origin=' + originAirport + '&Destination=' + destinationAirport + '&Class=' + flightClass;
+
+  var options = {
+    url: url,
+    rejectUnauthorized: false,
+    headers: {
+      Method: "GET",
+      Accept: "application/json",
+      Authorization: "Bearer 912dc4f9974c2ad4235fb874837f2e"
+    }
+  };
+
+  var callback = function callback(error, response, body) {
+    if (error) {
+      console.log('There was an error: ', error);
+    }
+    // return body;
+    console.log('body', body);
+  };
+
+  request(options, callback);
+};
+
+// TO TEST
+// console.log(getResult("SFO", "DXB", "2015-12-12", "economy"));
 
 module.exports = {
-  getData
+  getResult
 }
