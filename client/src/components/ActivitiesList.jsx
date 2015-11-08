@@ -27,6 +27,9 @@ var HomePage = React.createClass({
         </div>
         <div className="activityDesc" style={{'float':'left','width':'65%', 'marginLeft':'2%'}}>
           <span style={{'fontSize':'14px','fontWeight':'300'}}>{this.props.cityExperiences[this.props.selectedExperienceIndex].desc}</span>
+        </div>
+        <div className="xolaTag" style={{'float':'right','height':'70px'}}>
+          <span style={{'fontSize':'20px'}}>results powered by <img style={{'height':'50px'}}src='../xola.png'/></span>
         </div>          
       </div> : <div></div>;
   },
