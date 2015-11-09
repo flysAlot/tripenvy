@@ -59,6 +59,10 @@ var HomePage = React.createClass({
       }
 
     }
+
+    if (experienceArray.length === 0) {
+      experienceArray.push(<div>Sorry, no experiences were found here!</div>)
+    }
     // var resultArray = shuffle(experienceArray).slice(0,5);
     return (
       <div id="activities-area">
