@@ -26,10 +26,15 @@ var MapModal = React.createClass({
   render: function render() {
     var city = this.props.cities[this.props.selectedCityIndex];
     var imageArray = [];
-    if (city) {
+    if (city && city.images.length > 0) {
       for (var i = 0; i < Math.min(3, city.images.length); i++) {
         var imageUrl = city.images[i].images.low_resolution.url;
-        var caption = city.images[i].caption.text.slice(0,40);
+        if (city.images[i].caption) {
+          var caption = city.images[i].caption.text.slice(0,40);
+        } else {
+          var caption = "";
+        }
+        
         // console.log('this is imageUrl', imageUrl);
         imageArray.push(
           <div onClick={this.toggleActivities} className="img-box" key={i}>
